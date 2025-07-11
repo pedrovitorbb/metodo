@@ -77,6 +77,7 @@ export function ModuleCarousel({
                           onCheckedChange={(checked) => {
                             onToggleCompletion(module.id, !!checked);
                           }}
+                          className="h-5 w-5"
                         />
                         <Label
                           htmlFor={`completed-${module.id}`}
