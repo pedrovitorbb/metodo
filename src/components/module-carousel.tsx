@@ -58,12 +58,7 @@ export function ModuleCarousel({
                       />
                     </div>
                     <CardContent className="flex flex-col flex-grow p-6 pb-4">
-                      <CardTitle className="mb-2 text-lg">
-                        {module.title}
-                      </CardTitle>
-                      <p className="text-sm text-muted-foreground line-clamp-3 mb-4 flex-grow">
-                        {module.description}
-                      </p>
+                      {/* Title and description removed as per request */}
                     </CardContent>
                     <CardFooter className="flex-col items-start gap-4 p-6 pt-0">
                        <Button
