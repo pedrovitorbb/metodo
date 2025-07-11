@@ -68,7 +68,7 @@ export default function DashboardLayout({
         <div className="flex-1" />
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="ghost" size="icon" className="rounded-full">
+            <Button variant="ghost" size="icon" className="rounded-full transition-all duration-300 hover:bg-primary/20 hover:animate-pulse">
               <Avatar className="h-10 w-10">
                 <AvatarImage src={user.photoURL || ""} alt="User avatar" />
                 <AvatarFallback>
