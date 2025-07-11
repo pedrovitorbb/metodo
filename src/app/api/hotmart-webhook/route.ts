@@ -14,9 +14,12 @@ const PRODUCT_ID_TO_PLAN: { [key: string]: 'basic' | 'premium' } = {
 export async function POST(request: NextRequest) {
   try {
     // 1. Verificação de Segurança (extremamente importante)
-    // Este token é uma 'senha' que só você e a Hotmart conhecem.
+    // A linha abaixo lê o token secreto do seu arquivo .env.local (ou das variáveis de ambiente no servidor)
+    // Isso garante que o token nunca fique exposto no código.
     const hottok = request.headers.get("hottok");
-    if (hottok !== process.env.HOTMART_HOTTOK) {
+    const expectedHottok = process.env.HOTMART_HOTTOK;
+
+    if (hottok !== expectedHottok) {
       console.warn("Aviso: Tentativa de webhook com Hottok inválido.", { hottok });
       return NextResponse.json({ message: "Acesso não autorizado." }, { status: 401 });
     }
