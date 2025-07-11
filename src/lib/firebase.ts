@@ -1,8 +1,8 @@
-import { initializeApp, getApps, getApp, FirebaseOptions } from "firebase/app";
+import { initializeApp, getApps, getApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 
-const firebaseConfig: FirebaseOptions = {
+const firebaseConfig = {
   apiKey: "AIzaSyCO52NXqG1A7iZOOK96yr1IntIyS3BPffk",
   authDomain: "login-67c98.firebaseapp.com",
   projectId: "login-67c98",
