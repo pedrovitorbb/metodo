@@ -2,7 +2,7 @@
 
 import React, { createContext, useState, useEffect, ReactNode } from "react";
 import { User as FirebaseAuthUser, onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, sendPasswordResetEmail } from "firebase/auth";
-import { doc, getDoc, setDoc } from "firebase/firestore";
+import { doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
 import { auth, db } from "@/lib/firebase";
 import { AuthCredentials, UserProfile } from "@/types";
 
@@ -51,6 +51,9 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   }, []);
 
   const register = async ({ email, password }: AuthCredentials) => {
+    // Firebase handles password creation securely.
+    // It takes the plain-text password, securely hashes it on its servers,
+    // and creates the user account. The original password is never stored.
     const userCredential = await createUserWithEmailAndPassword(auth, email, password);
     const firebaseUser = userCredential.user;
     
