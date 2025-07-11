@@ -17,8 +17,10 @@ export default function DashboardPage() {
     "3": { completedLessons: 20 },
   });
 
-  const handleStartModule = (moduleId: string) => {
-    // Em um aplicativo real, você navegaria para a página do módulo aqui.
+  const handleStartModule = (moduleId: string, pdfUrl?: string) => {
+    if (pdfUrl) {
+      window.open(pdfUrl, "_blank");
+    }
     console.log(`Iniciando o módulo: ${moduleId}`);
   };
 

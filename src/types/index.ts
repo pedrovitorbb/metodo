@@ -10,6 +10,7 @@ export interface Module {
   imageUrl: string;
   imageHint: string;
   lessons: number;
+  pdfUrl?: string;
 }
 
 export interface UserProgress {

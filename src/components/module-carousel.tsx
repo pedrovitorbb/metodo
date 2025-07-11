@@ -16,7 +16,7 @@ import { PlayCircle } from "lucide-react";
 
 interface ModuleCarouselProps {
   modules: Module[];
-  onStartModule: (moduleId: string) => void;
+  onStartModule: (moduleId: string, pdfUrl?: string) => void;
 }
 
 export function ModuleCarousel({ modules, onStartModule }: ModuleCarouselProps) {
@@ -51,7 +51,7 @@ export function ModuleCarousel({ modules, onStartModule }: ModuleCarouselProps) 
                       
                       <div className="mt-auto">
                         <Button
-                          onClick={() => onStartModule(module.id)}
+                          onClick={() => onStartModule(module.id, module.pdfUrl)}
                           size="sm"
                           className="w-full"
                         >
