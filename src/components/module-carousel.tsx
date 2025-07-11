@@ -44,10 +44,10 @@ export function ModuleCarousel({
           {modules.map((module) => {
             const isCompleted = (progress[module.id]?.completedLessons || 0) > 0;
             return (
-              <CarouselItem key={module.id} className="md:basis-1/2 lg:basis-1/3">
+              <CarouselItem key={module.id} className="md:basis-1/3 lg:basis-1/4">
                 <div className="p-1 h-full">
                   <Card className="flex flex-col h-full overflow-hidden transition-all duration-300 hover:shadow-lg hover:shadow-primary/20">
-                    <div className="aspect-[5/2] relative">
+                    <div className="aspect-[16/5] relative">
                       <Image
                         src={module.imageUrl}
                         alt={module.title}
@@ -70,14 +70,14 @@ export function ModuleCarousel({
                         <BookOpen className="mr-2 h-4 w-4" />
                         Acceder al PDF
                       </Button>
-                      <div className="flex items-center space-x-2">
+                      <div className="flex items-center space-x-3">
                         <Checkbox
                           id={`completed-${module.id}`}
                           checked={isCompleted}
                           onCheckedChange={(checked) => {
                             onToggleCompletion(module.id, !!checked);
                           }}
-                          className="h-5 w-5"
+                          className="h-6 w-6"
                         />
                         <Label
                           htmlFor={`completed-${module.id}`}
