@@ -5,3 +5,12 @@ runConfig:
   # Increase this value if you'd like to automatically spin up
   # more instances in response to increased traffic.
   maxInstances: 1
+
+# Define as variáveis de ambiente necessárias para o back-end.
+# O valor real e secreto delas será configurado no Console do Firebase
+# após o deploy.
+environmentVariables:
+  HOTMART_HOTTOK:
+    secret: true
+  FIREBASE_SERVICE_ACCOUNT_KEY:
+    secret: true
