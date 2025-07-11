@@ -2,23 +2,20 @@
 
 import React, { useEffect } from "react";
 import { useAuth } from "@/hooks/use-auth";
-import { redirect, usePathname } from "next/navigation";
-import { Loader2, LogOut, BookOpen, LayoutDashboard, User, Settings } from "lucide-react";
-import {
-  SidebarProvider,
-  Sidebar,
-  SidebarHeader,
-  SidebarContent,
-  SidebarMenu,
-  SidebarMenuItem,
-  SidebarMenuButton,
-  SidebarFooter,
-  SidebarInset,
-  SidebarTrigger,
-} from "@/components/ui/sidebar";
+import { redirect, useRouter } from "next/navigation";
+import { Loader2, LogOut } from "lucide-react";
 import { Logo } from "@/components/logo";
 import { useToast } from "@/hooks/use-toast";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { Button } from "@/components/ui/button";
 
 export default function DashboardLayout({
   children,
@@ -28,7 +25,6 @@ export default function DashboardLayout({
   const { user, loading, logout } = useAuth();
   const router = useRouter();
   const { toast } = useToast();
-  const pathname = usePathname();
 
   useEffect(() => {
     if (!loading && !user) {
@@ -66,59 +62,37 @@ export default function DashboardLayout({
   }
 
   return (
-    <SidebarProvider>
-      <Sidebar>
-        <SidebarHeader>
-          <Logo />
-        </SidebarHeader>
-        <SidebarContent>
-          <SidebarMenu>
-            <SidebarMenuItem>
-              <SidebarMenuButton href="/dashboard" isActive={pathname === '/dashboard'} tooltip="Dashboard">
-                <LayoutDashboard />
-                Dashboard
-              </SidebarMenuButton>
-            </SidebarMenuItem>
-            <SidebarMenuItem>
-              <SidebarMenuButton href="/dashboard" isActive={pathname.startsWith('/dashboard/modules')} tooltip="Modules">
-                <BookOpen />
-                Modules
-              </SidebarMenuButton>
-            </SidebarMenuItem>
-          </SidebarMenu>
-        </SidebarContent>
-        <SidebarFooter className="flex-col !items-start gap-4">
-          <div className="flex w-full items-center justify-between rounded-lg p-2 hover:bg-sidebar-accent">
-            <div className="flex items-center gap-2">
+    <div className="flex min-h-screen w-full flex-col">
+      <header className="sticky top-0 flex h-16 items-center gap-4 border-b bg-background px-4 md:px-6 z-50">
+        <Logo />
+        <div className="flex-1" />
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="ghost" size="icon" className="rounded-full">
               <Avatar className="h-8 w-8">
                 <AvatarImage src={user.photoURL || `https://placehold.co/40x40.png`} data-ai-hint="user avatar" />
                 <AvatarFallback>{user.email?.charAt(0).toUpperCase()}</AvatarFallback>
               </Avatar>
-              <span className="truncate text-sm font-medium">{user.email}</span>
-            </div>
-            <SidebarMenuButton onClick={handleLogout} variant="ghost" size="icon" className="h-8 w-8 shrink-0">
-              <LogOut size={16} />
-            </SidebarMenuButton>
-          </div>
-        </SidebarFooter>
-      </Sidebar>
-      <SidebarInset>
-        <header className="flex h-14 items-center gap-4 border-b bg-background/95 px-4 backdrop-blur-sm md:px-6">
-            <div className="md:hidden">
-              <SidebarTrigger />
-            </div>
-            <div className="flex-1">
-              {/* Maybe a search bar or breadcrumbs in the future */}
-            </div>
-        </header>
-        <main className="flex-1 overflow-auto p-4 md:p-6">{children}</main>
-      </SidebarInset>
-    </SidebarProvider>
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end">
+            <DropdownMenuLabel className="font-normal">
+              <div className="flex flex-col space-y-1">
+                <p className="text-sm font-medium leading-none">My Account</p>
+                <p className="text-xs leading-none text-muted-foreground">
+                  {user.email}
+                </p>
+              </div>
+            </DropdownMenuLabel>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem onClick={handleLogout}>
+              <LogOut className="mr-2 h-4 w-4" />
+              <span>Log out</span>
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      </header>
+      <main className="flex-1 overflow-auto p-4 md:p-6">{children}</main>
+    </div>
   );
 }
-
-// A stub for useRouter to avoid breaking server rendering where it's not actually used
-// but is required by the handleLogout function.
-// In a real app, you might structure this differently if this layout were a Server Component.
-// But since it's a client component due to auth checks, this is fine.
-const { useRouter } = require("next/navigation");
