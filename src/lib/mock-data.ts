@@ -3,8 +3,8 @@ import type { Module } from "@/types";
 export const modules: Module[] = [
   {
     id: "1",
-    title: "Introduction to React",
-    description: "Learn the fundamentals of React, including components, props, and state.",
+    title: "Introducción a React",
+    description: "Aprende los fundamentos de React, incluyendo componentes, props y estado.",
     imageUrl: "https://i.imgur.com/85NgJNK.png",
     imageHint: "abstract code",
     lessons: 1,
@@ -12,8 +12,8 @@ export const modules: Module[] = [
   },
   {
     id: "2",
-    title: "Advanced State Management",
-    description: "Dive deep into state management with Context API and Redux.",
+    title: "Gestión Avanzada del Estado",
+    description: "Profundiza en la gestión del estado con Context API y Redux.",
     imageUrl: "https://i.imgur.com/xJHXKjI.png",
     imageHint: "network diagram",
     lessons: 1,
@@ -21,8 +21,8 @@ export const modules: Module[] = [
   },
   {
     id: "3",
-    title: "Next.js for Production",
-    description: "Build and deploy production-ready applications with Next.js.",
+    title: "Next.js para Producción",
+    description: "Construye y despliega aplicaciones listas para producción con Next.js.",
     imageUrl: "https://i.imgur.com/JvvCofs.png",
     imageHint: "server illustration",
     lessons: 1,
@@ -30,8 +30,8 @@ export const modules: Module[] = [
   },
   {
     id: "4",
-    title: "Mastering TypeScript",
-    description: "Enhance your JavaScript projects with static typing.",
+    title: "Dominando TypeScript",
+    description: "Mejora tus proyectos de JavaScript con tipado estático.",
     imageUrl: "https://i.imgur.com/zdWkm8s.png",
     imageHint: "typescript logo",
     lessons: 1,
@@ -39,8 +39,8 @@ export const modules: Module[] = [
   },
   {
     id: "5",
-    title: "UI/UX Design Principles",
-    description: "Understand the core principles of creating beautiful and usable interfaces.",
+    title: "Principios de Diseño UI/UX",
+    description: "Comprende los principios fundamentales para crear interfaces atractivas y funcionales.",
     imageUrl: "https://i.imgur.com/pMo3NKr.png",
     imageHint: "design wireframe",
     lessons: 1,
@@ -48,8 +48,8 @@ export const modules: Module[] = [
   },
   {
     id: "6",
-    title: "Firebase for Web Devs",
-    description: "Integrate backend services like auth and database with Firebase.",
+    title: "Firebase para Desarrolladores Web",
+    description: "Integra servicios de backend como autenticación y base de datos con Firebase.",
     imageUrl: "https://i.imgur.com/OIBJvzm.png",
     imageHint: "firebase logo",
     lessons: 1,
@@ -57,8 +57,8 @@ export const modules: Module[] = [
   },
   {
     id: "7",
-    title: "GraphQL Essentials",
-    description: "Learn how to build and consume GraphQL APIs.",
+    title: "Fundamentos de GraphQL",
+    description: "Aprende a construir y consumir APIs de GraphQL.",
     imageUrl: "https://i.imgur.com/zElS168.png",
     imageHint: "api database",
     lessons: 1,
@@ -66,8 +66,8 @@ export const modules: Module[] = [
   },
   {
     id: "8",
-    title: "Advanced CSS and Sass",
-    description: "Master modern CSS features and preprocessors like Sass.",
+    title: "CSS Avanzado y Sass",
+    description: "Domina las características modernas de CSS y preprocesadores como Sass.",
     imageUrl: "https://i.imgur.com/4w9q4jI.png",
     imageHint: "css code",
     lessons: 1,
@@ -75,8 +75,8 @@ export const modules: Module[] = [
   },
   {
     id: "9",
-    title: "Web Accessibility (WCAG)",
-    description: "Build inclusive web applications that are usable by everyone.",
+    title: "Accesibilidad Web (WCAG)",
+    description: "Construye aplicaciones web inclusivas que puedan ser utilizadas por todos.",
     imageUrl: "https://i.imgur.com/alCDUIE.png",
     imageHint: "accessibility screen reader",
     lessons: 1,

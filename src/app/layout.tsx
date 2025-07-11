@@ -4,8 +4,8 @@ import { AuthProvider } from "@/context/auth-context";
 import { Toaster } from "@/components/ui/toaster";
 
 export const metadata: Metadata = {
-  title: "Metodo Hypno",
-  description: "Expand your knowledge, one module at a time.",
+  title: "Método Hypno",
+  description: "Expande tu conocimiento, un módulo a la vez.",
 };
 
 export default function RootLayout({
@@ -14,7 +14,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark">
+    <html lang="es" className="dark">
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link

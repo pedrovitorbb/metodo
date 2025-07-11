@@ -2,7 +2,7 @@ import { RegisterForm } from "@/components/register-form";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Register | Metodo Hypno",
+  title: "Registrarse | Método Hypno",
 };
 
 export default function RegisterPage() {

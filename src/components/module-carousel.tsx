@@ -32,7 +32,7 @@ export function ModuleCarousel({
   return (
     <div>
       <h2 className="mb-4 text-2xl font-semibold tracking-tight">
-        Todos os Módulos
+        Todos los Módulos
       </h2>
       <Carousel
         opts={{
@@ -68,7 +68,7 @@ export function ModuleCarousel({
                         className="w-full"
                       >
                         <BookOpen className="mr-2 h-4 w-4" />
-                        Acessar PDF
+                        Acceder al PDF
                       </Button>
                       <div className="flex items-center space-x-2">
                         <Checkbox
@@ -82,7 +82,7 @@ export function ModuleCarousel({
                           htmlFor={`completed-${module.id}`}
                           className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 cursor-pointer"
                         >
-                          Módulo Concluído
+                          Módulo Completado
                         </Label>
                       </div>
                     </CardFooter>

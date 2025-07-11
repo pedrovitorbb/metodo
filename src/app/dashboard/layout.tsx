@@ -37,14 +37,14 @@ export default function DashboardLayout({
       await logout();
       router.push("/login");
       toast({
-        title: "Logged Out",
-        description: "You have been successfully logged out.",
+        title: "Sesión Cerrada",
+        description: "Has cerrado sesión correctamente.",
       });
     } catch (error) {
       toast({
         variant: "destructive",
-        title: "Logout Failed",
-        description: "Could not log you out. Please try again.",
+        title: "Fallo al Cerrar Sesión",
+        description: "No se pudo cerrar la sesión. Por favor, inténtalo de nuevo.",
       });
     }
   };
@@ -80,7 +80,7 @@ export default function DashboardLayout({
           <DropdownMenuContent align="end">
             <DropdownMenuLabel className="font-normal">
               <div className="flex flex-col space-y-1">
-                <p className="text-sm font-medium leading-none">My Account</p>
+                <p className="text-sm font-medium leading-none">Mi Cuenta</p>
                 <p className="text-xs leading-none text-muted-foreground">
                   {user.email}
                 </p>
@@ -89,7 +89,7 @@ export default function DashboardLayout({
             <DropdownMenuSeparator />
             <DropdownMenuItem onClick={handleLogout}>
               <LogOut className="mr-2 h-4 w-4" />
-              <span>Log out</span>
+              <span>Cerrar Sesión</span>
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>

@@ -21,7 +21,7 @@ export function Logo({ className }: { className?: string }) {
           fill="currentColor"
         />
       </svg>
-      <span className="text-xl font-bold text-foreground">Metodo Hypno</span>
+      <span className="text-xl font-bold text-foreground">Método Hypno</span>
     </div>
   );
 }

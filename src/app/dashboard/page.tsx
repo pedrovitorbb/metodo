@@ -21,7 +21,7 @@ export default function DashboardPage() {
     if (pdfUrl) {
       window.open(pdfUrl, "_blank");
     }
-    console.log(`Acessando material do módulo: ${moduleId}`);
+    console.log(`Accediendo al material del módulo: ${moduleId}`);
   };
 
   const handleToggleCompletion = (moduleId: string, isCompleted: boolean) => {
@@ -49,15 +49,15 @@ export default function DashboardPage() {
     <div className="space-y-8">
       <div>
         <h1 className="text-3xl font-bold tracking-tight">
-          Bem-vindo de volta, {user?.displayName || user?.email?.split("@")[0]}!
+          ¡Bienvenido de vuelta, {user?.displayName || user?.email?.split("@")[0]}!
         </h1>
         <p className="text-muted-foreground">
-          Pronto para continuar sua jornada de aprendizado?
+          ¿Listo para continuar tu viaje de aprendizaje?
         </p>
       </div>
 
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight">Seu Progresso Geral</h2>
+        <h2 className="text-2xl font-semibold tracking-tight">Tu Progreso General</h2>
         <div>
           <div className="flex items-center gap-4">
             <Progress value={overallProgressPercentage} className="h-3 flex-1" />
@@ -66,7 +66,7 @@ export default function DashboardPage() {
             </span>
           </div>
           <p className="text-sm text-muted-foreground mt-2">
-            Você completou {totalCompletedModules} de {totalModules} módulos. Continue assim!
+            Has completado {totalCompletedModules} de {totalModules} módulos. ¡Sigue así!
           </p>
         </div>
       </div>

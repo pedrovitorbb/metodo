@@ -27,7 +27,7 @@ import { useState } from "react";
 import { Loader2 } from "lucide-react";
 
 const formSchema = z.object({
-  email: z.string().email({ message: "Invalid email address." }),
+  email: z.string().email({ message: "Dirección de correo electrónico no válida." }),
 });
 
 export function PasswordResetForm() {
@@ -53,7 +53,7 @@ export function PasswordResetForm() {
         variant: "destructive",
         title: "Error",
         description:
-          error.message || "Could not send password reset email. Please try again.",
+          error.message || "No se pudo enviar el correo de restablecimiento. Por favor, inténtalo de nuevo.",
       });
     } finally {
       setIsLoading(false);
@@ -64,15 +64,14 @@ export function PasswordResetForm() {
     return (
       <Card>
         <CardHeader>
-          <CardTitle>Check Your Email</CardTitle>
+          <CardTitle>Revisa tu Correo</CardTitle>
           <CardDescription>
-            A password reset link has been sent to your email address if it's
-            associated with an account.
+            Se ha enviado un enlace para restablecer la contraseña a tu dirección de correo si está asociada con una cuenta.
           </CardDescription>
         </CardHeader>
         <CardContent>
           <Link href="/login">
-            <Button className="w-full">Back to Login</Button>
+            <Button className="w-full">Volver a Iniciar Sesión</Button>
           </Link>
         </CardContent>
       </Card>
@@ -82,9 +81,9 @@ export function PasswordResetForm() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Forgot Password?</CardTitle>
+        <CardTitle>¿Olvidaste tu Contraseña?</CardTitle>
         <CardDescription>
-          Enter your email and we'll send you a link to reset your password.
+          Ingresa tu correo y te enviaremos un enlace para restablecer tu contraseña.
         </CardDescription>
       </CardHeader>
       <CardContent>
@@ -95,9 +94,9 @@ export function PasswordResetForm() {
               name="email"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Email</FormLabel>
+                  <FormLabel>Correo Electrónico</FormLabel>
                   <FormControl>
-                    <Input placeholder="you@example.com" {...field} />
+                    <Input placeholder="tu@ejemplo.com" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -105,14 +104,14 @@ export function PasswordResetForm() {
             />
             <Button type="submit" className="w-full" disabled={isLoading}>
               {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-              Send Reset Link
+              Enviar Enlace de Restablecimiento
             </Button>
           </form>
         </Form>
         <div className="mt-6 text-center text-sm text-muted-foreground">
-          Remember your password?{" "}
+          ¿Recuerdas tu contraseña?{" "}
           <Link href="/login" className="text-primary hover:underline">
-            Sign in
+            Iniciar sesión
           </Link>
         </div>
       </CardContent>

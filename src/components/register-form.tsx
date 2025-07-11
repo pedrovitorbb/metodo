@@ -28,10 +28,10 @@ import { useState } from "react";
 import { Loader2 } from "lucide-react";
 
 const formSchema = z.object({
-  email: z.string().email({ message: "Invalid email address." }),
+  email: z.string().email({ message: "Dirección de correo electrónico no válida." }),
   password: z
     .string()
-    .min(6, { message: "Password must be at least 6 characters." }),
+    .min(6, { message: "La contraseña debe tener al menos 6 caracteres." }),
 });
 
 export function RegisterForm() {
@@ -53,16 +53,16 @@ export function RegisterForm() {
     try {
       await register(values);
       toast({
-        title: "Registration Successful",
-        description: "You have been successfully registered. Please log in.",
+        title: "Registro Exitoso",
+        description: "Te has registrado correctamente. Por favor, inicia sesión.",
       });
       router.push("/login");
     } catch (error: any) {
       toast({
         variant: "destructive",
-        title: "Registration Failed",
+        title: "Fallo en el Registro",
         description:
-          error.message || "An unexpected error occurred. Please try again.",
+          error.message || "Ocurrió un error inesperado. Por favor, inténtalo de nuevo.",
       });
     } finally {
       setIsLoading(false);
@@ -72,9 +72,9 @@ export function RegisterForm() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Create an Account</CardTitle>
+        <CardTitle>Crear una Cuenta</CardTitle>
         <CardDescription>
-          Start your learning journey with Flux Academy.
+          Comienza tu viaje de aprendizaje con Método Hypno.
         </CardDescription>
       </CardHeader>
       <CardContent>
@@ -85,9 +85,9 @@ export function RegisterForm() {
               name="email"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Email</FormLabel>
+                  <FormLabel>Correo Electrónico</FormLabel>
                   <FormControl>
-                    <Input placeholder="you@example.com" {...field} />
+                    <Input placeholder="tu@ejemplo.com" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -98,7 +98,7 @@ export function RegisterForm() {
               name="password"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Password</FormLabel>
+                  <FormLabel>Contraseña</FormLabel>
                   <FormControl>
                     <Input type="password" placeholder="••••••••" {...field} />
                   </FormControl>
@@ -108,14 +108,14 @@ export function RegisterForm() {
             />
             <Button type="submit" className="w-full" disabled={isLoading}>
               {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-              Create Account
+              Crear Cuenta
             </Button>
           </form>
         </Form>
         <div className="mt-6 text-center text-sm text-muted-foreground">
-          Already have an account?{" "}
+          ¿Ya tienes una cuenta?{" "}
           <Link href="/login" className="text-primary hover:underline">
-            Sign in
+            Iniciar sesión
           </Link>
         </div>
       </CardContent>
