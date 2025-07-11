@@ -1,14 +1,14 @@
 
 import { NextRequest, NextResponse } from "next/server";
-import { doc, getDocs, query, where, updateDoc } from "firebase/firestore";
+import { collection, getDocs, query, where, updateDoc, doc } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 
 // Mapeia o ID do produto da Hotmart para o plano no seu sistema
 const PRODUCT_ID_TO_PLAN: { [key: string]: 'basic' | 'premium' } = {
-  // Substitua '123456' pelo ID do seu produto de $7 (Plano Básico)
-  '123456': 'basic', 
-  // Substitua '789012' pelo ID do seu produto de $17 (Plano Premium)
-  '789012': 'premium', 
+  // ID do produto do plano Básico
+  'tbpun0ml': 'basic', 
+  // ID do produto do plano Premium
+  'y3v9b5p3': 'premium', 
 };
 
 export async function POST(request: NextRequest) {
@@ -53,8 +53,8 @@ export async function POST(request: NextRequest) {
     }
 
     // 4. Atualizar o plano do usuário
-    const userDoc = querySnapshot.docs[0];
-    const userDocRef = doc(db, "users", userDoc.id);
+    const userDocSnapshot = querySnapshot.docs[0];
+    const userDocRef = doc(db, "users", userDocSnapshot.id);
     await updateDoc(userDocRef, {
       plan: plan,
     });
