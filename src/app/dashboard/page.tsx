@@ -6,7 +6,6 @@ import { UserProgress } from "@/types";
 import { useState, useMemo } from "react";
 import { ModuleCarousel } from "@/components/module-carousel";
 import { Progress } from "@/components/ui/progress";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 export default function DashboardPage() {
   const { user } = useAuth();
@@ -48,11 +47,9 @@ export default function DashboardPage() {
         </p>
       </div>
 
-      <Card>
-        <CardHeader>
-          <CardTitle>Seu Progresso Geral</CardTitle>
-        </CardHeader>
-        <CardContent>
+      <div className="space-y-4">
+        <h2 className="text-2xl font-semibold tracking-tight">Seu Progresso Geral</h2>
+        <div>
           <div className="flex items-center gap-4">
             <Progress value={overallProgressPercentage} className="h-3 flex-1" />
             <span className="font-semibold text-primary">
@@ -62,8 +59,8 @@ export default function DashboardPage() {
           <p className="text-sm text-muted-foreground mt-2">
             Você completou {totalCompletedLessons} de {totalLessons} lições. Continue assim!
           </p>
-        </CardContent>
-      </Card>
+        </div>
+      </div>
 
       <ModuleCarousel modules={modules} onStartModule={handleStartModule} />
     </div>
