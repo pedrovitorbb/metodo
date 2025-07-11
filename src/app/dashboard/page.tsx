@@ -52,7 +52,7 @@ export default function DashboardPage() {
           ¡Bienvenido de vuelta, {user?.displayName || user?.email?.split("@")[0]}!
         </h1>
         <p className="text-muted-foreground">
-          ¿Listo para continuar tu viaje de aprendizaje?
+          ¿Listo para continuar tu viaje de aprendizaje? Tu plan actual es: <span className="font-semibold text-primary">{user?.plan}</span>.
         </p>
       </div>
 
@@ -74,6 +74,7 @@ export default function DashboardPage() {
       <ModuleCarousel
         modules={modules}
         progress={progress}
+        userPlan={user?.plan || 'basic'}
         onStartModule={handleStartModule}
         onToggleCompletion={handleToggleCompletion}
       />

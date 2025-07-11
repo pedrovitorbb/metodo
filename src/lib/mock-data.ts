@@ -9,6 +9,7 @@ export const modules: Module[] = [
     imageHint: "abstract code",
     lessons: 1,
     pdfUrl: "https://drive.google.com/file/d/1RYuOR2lHkr-PHa3AUtJ-lEdoYFFkE8ZM/view?usp=drive_link",
+    isPremium: false,
   },
   {
     id: "2",
@@ -18,6 +19,7 @@ export const modules: Module[] = [
     imageHint: "network diagram",
     lessons: 1,
     pdfUrl: "https://drive.google.com/file/d/112qJkCaY9TP9YTeNBtf7UWwKqUQgWdQF/view?usp=drive_link",
+    isPremium: false,
   },
   {
     id: "3",
@@ -27,6 +29,7 @@ export const modules: Module[] = [
     imageHint: "server illustration",
     lessons: 1,
     pdfUrl: "https://drive.google.com/file/d/1-j_t0cxp9DxzpdPjhm-_nCQi9Ms41-JI/view?usp=drive_link",
+    isPremium: false,
   },
   {
     id: "4",
@@ -36,6 +39,7 @@ export const modules: Module[] = [
     imageHint: "typescript logo",
     lessons: 1,
     pdfUrl: "https://drive.google.com/file/d/13g5B5CkNgPrifLsbRVmuFn_Y0I_-oFAD/view?usp=drive_link",
+    isPremium: false,
   },
   {
     id: "5",
@@ -45,6 +49,7 @@ export const modules: Module[] = [
     imageHint: "design wireframe",
     lessons: 1,
     pdfUrl: "https://drive.google.com/file/d/1JmrWf1SkoYPQkrQ9FWLNTR6Lx8HG6TDZ/view?usp=drive_link",
+    isPremium: true,
   },
   {
     id: "6",
@@ -54,6 +59,7 @@ export const modules: Module[] = [
     imageHint: "firebase logo",
     lessons: 1,
     pdfUrl: "https://drive.google.com/file/d/14E6RyFFMZgHcjy6xbVJGXoibQxh0RWIs/view?usp=drive_link",
+    isPremium: true,
   },
   {
     id: "7",
@@ -63,6 +69,7 @@ export const modules: Module[] = [
     imageHint: "api database",
     lessons: 1,
     pdfUrl: "https://drive.google.com/file/d/1AnXbEeWC9dEG5equDSt12lyqxJFrSiyc/view?usp=drive_link",
+    isPremium: true,
   },
   {
     id: "8",
@@ -72,6 +79,7 @@ export const modules: Module[] = [
     imageHint: "css code",
     lessons: 1,
     pdfUrl: "https://drive.google.com/file/d/1DQI91MVMuw0US_dY-jkyIRx-7vfV9z7F/view?usp=drive_link",
+    isPremium: true,
   },
   {
     id: "9",
@@ -81,6 +89,7 @@ export const modules: Module[] = [
     imageHint: "accessibility screen reader",
     lessons: 1,
     pdfUrl: "https://drive.google.com/file/d/15r77W9nTfCjAIbEyo5jf-8EDtTrb4HIA/view?usp=drive_link",
+    isPremium: true,
   },
 ];
 

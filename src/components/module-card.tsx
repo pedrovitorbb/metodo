@@ -19,8 +19,7 @@ export function ModuleCard({ module, progress, onProgressUpdate }: ModuleCardPro
             <Image
                 src={module.imageUrl}
                 alt={module.title}
-                width={600}
-                height={400}
+                fill
                 data-ai-hint={module.imageHint}
                 className="object-cover w-full h-full"
             />

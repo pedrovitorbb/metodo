@@ -84,6 +84,9 @@ export default function DashboardLayout({
                 <p className="text-xs leading-none text-muted-foreground">
                   {user.email}
                 </p>
+                 <p className="text-xs leading-none text-muted-foreground pt-1">
+                  Plan: <span className="font-semibold text-primary capitalize">{user.plan}</span>
+                </p>
               </div>
             </DropdownMenuLabel>
             <DropdownMenuSeparator />

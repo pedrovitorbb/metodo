@@ -3,18 +3,27 @@ export interface AuthCredentials {
   password?: string;
 }
 
+export interface UserProfile {
+  uid: string;
+  email: string | null;
+  displayName: string | null;
+  photoURL: string | null;
+  plan: 'basic' | 'premium';
+}
+
 export interface Module {
   id: string;
   title: string;
   description: string;
   imageUrl: string;
   imageHint: string;
-  lessons: number; // Represents total lessons, can be used for more granular progress later
+  lessons: number; 
   pdfUrl?: string;
+  isPremium: boolean;
 }
 
 export interface UserProgress {
   [moduleId: string]: {
-    completedLessons: number; // Using 1 for completed, 0 for not completed
+    completedLessons: number; 
   };
 }
