@@ -81,6 +81,10 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const resetPassword = async (email: string) => {
+    // This function tells Firebase to handle the entire password reset process.
+    // Firebase generates a secure, one-time-use link and sends it to the user's email address.
+    // We don't have to manage tokens or links; Firebase does it all.
+    // The email template can be customized in the Firebase Console.
     await sendPasswordResetEmail(auth, email);
   };
 
