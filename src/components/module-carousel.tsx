@@ -62,7 +62,7 @@ export function ModuleCarousel({
                     : "hover:shadow-lg hover:shadow-primary/20"
                 }`}
               >
-                <div className="aspect-video w-full relative">
+                <div className="aspect-video w-full relative flex-grow">
                   <Image
                     src={module.imageUrl}
                     alt={module.title}
@@ -78,13 +78,7 @@ export function ModuleCarousel({
                     </div>
                   )}
                 </div>
-                <CardContent className="p-6 flex-grow">
-                  <h3 className="text-xl font-bold mb-2">{module.title}</h3>
-                  <p className="text-muted-foreground text-sm line-clamp-3">
-                    {module.description}
-                  </p>
-                </CardContent>
-                <CardFooter className="p-6 pt-0 mt-auto flex flex-col items-start gap-4">
+                <CardFooter className="p-4 mt-auto flex flex-col items-start gap-4 bg-card">
                   <Button
                     onClick={() => onStartModule(module.id, module.pdfUrl)}
                     className="w-full"
