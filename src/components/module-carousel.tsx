@@ -47,12 +47,12 @@ export function ModuleCarousel({
               <CarouselItem key={module.id} className="md:basis-1/2 lg:basis-1/3">
                 <div className="p-1 h-full">
                   <Card className="flex flex-col h-full overflow-hidden transition-all duration-300 hover:shadow-lg hover:shadow-primary/20">
-                    <div className="aspect-video relative">
+                    <div className="aspect-[2/1] relative">
                       <Image
                         src={module.imageUrl}
                         alt={module.title}
                         width={600}
-                        height={400}
+                        height={300}
                         data-ai-hint={module.imageHint}
                         className="object-cover w-full h-full"
                       />
