@@ -1,24 +1,26 @@
 
 import { NextRequest, NextResponse } from "next/server";
-import { collection, getDocs, query, where, updateDoc, doc } from "firebase/firestore";
-import { db } from "@/lib/firebase";
+import { adminAuth, adminDb } from "@/lib/firebase-admin";
 
 // Mapeia o ID do produto da Hotmart para o plano no seu sistema
 const PRODUCT_ID_TO_PLAN: { [key: string]: 'basic' | 'premium' } = {
   // ID do produto do plano Básico
-  'm6i0896d': 'basic', 
+  'm6i0896d': 'basic',
   // ID do produto do plano Premium
-  'jhynedgi': 'premium', 
+  'jhynedgi': 'premium',
 };
 
 export async function POST(request: NextRequest) {
   try {
     // 1. Verificação de Segurança (extremamente importante)
-    // A linha abaixo lê o token secreto do seu arquivo .env.local (ou das variáveis de ambiente no servidor)
-    // Isso garante que o token nunca fique exposto no código.
-    // O valor de HOTMART_HOTTOK deve ser configurado no seu ambiente.
+    // Lê o token secreto das variáveis de ambiente no servidor.
     const hottok = request.headers.get("hottok");
     const expectedHottok = process.env.HOTMART_HOTTOK;
+
+    if (!expectedHottok) {
+        console.error("Erro crítico: A variável de ambiente HOTMART_HOTTOK não está configurada no servidor.");
+        return NextResponse.json({ message: "Erro de configuração no servidor." }, { status: 500 });
+    }
 
     if (hottok !== expectedHottok) {
       console.warn("Aviso: Tentativa de webhook com Hottok inválido.", { hottok });
@@ -31,40 +33,68 @@ export async function POST(request: NextRequest) {
     if (payload.event !== "purchase.approved") {
         return NextResponse.json({ message: "Evento ignorado." }, { status: 200 });
     }
-    
+
     const purchaseData = payload.data.purchase;
     const buyerEmail = purchaseData.buyer.email;
+    const buyerName = purchaseData.buyer.name;
     const productId = purchaseData.product.id.toString();
-    
+
     const plan = PRODUCT_ID_TO_PLAN[productId];
 
-    // Se o produto comprado não mapeia para um plano, não fazemos nada.
     if (!plan) {
       console.log(`Produto com ID ${productId} não corresponde a nenhum plano configurado. Ignorando.`);
       return NextResponse.json({ message: "Produto não configurado." }, { status: 200 });
     }
 
-    // 3. Encontrar o usuário no Firestore pelo e-mail
-    const usersRef = collection(db, "users");
-    const q = query(usersRef, where("email", "==", buyerEmail));
-    const querySnapshot = await getDocs(q);
+    // 3. Encontrar ou criar o usuário
+    let userRecord;
+    try {
+      // Tenta encontrar um usuário existente pelo e-mail
+      userRecord = await adminAuth.getUserByEmail(buyerEmail);
+      console.log(`Usuário encontrado: ${buyerEmail}, UID: ${userRecord.uid}. Atualizando plano.`);
+      
+      // Atualiza o plano no Firestore
+      const userDocRef = adminDb.collection("users").doc(userRecord.uid);
+      await userDocRef.update({ plan: plan });
+      
+      console.log(`Sucesso: Plano do usuário ${buyerEmail} atualizado para ${plan}.`);
 
-    if (querySnapshot.empty) {
-      // Se o usuário não existe, você pode optar por criá-lo aqui
-      // ou simplesmente registrar o erro. Por enquanto, vamos registrar.
-      console.error(`Erro: Usuário com e-mail ${buyerEmail} não encontrado no Firestore.`);
-      return NextResponse.json({ message: "Usuário não encontrado." }, { status: 404 });
+    } catch (error: any) {
+      // Se o erro for "user-not-found", criamos um novo usuário
+      if (error.code === 'auth/user-not-found') {
+        console.log(`Usuário com e-mail ${buyerEmail} não encontrado. Criando novo usuário...`);
+        
+        // Gera uma senha aleatória e segura
+        const randomPassword = Math.random().toString(36).slice(-10);
+
+        userRecord = await adminAuth.createUser({
+          email: buyerEmail,
+          emailVerified: true,
+          password: randomPassword,
+          displayName: buyerName,
+        });
+
+        // Cria o perfil no Firestore
+        const userDocRef = adminDb.collection("users").doc(userRecord.uid);
+        await userDocRef.set({
+          uid: userRecord.uid,
+          email: userRecord.email,
+          displayName: userRecord.displayName,
+          photoURL: null,
+          plan: plan, // Atribui o plano comprado
+        });
+        
+        // Envia o e-mail de redefinição de senha para o usuário criar sua própria senha
+        await adminAuth.generatePasswordResetLink(buyerEmail);
+        console.log(`Usuário ${buyerEmail} criado com sucesso. E-mail para definição de senha será enviado pelo Firebase.`);
+
+      } else {
+        // Se for outro erro, registra e encerra
+        throw error;
+      }
     }
 
-    // 4. Atualizar o plano do usuário
-    const userDocSnapshot = querySnapshot.docs[0];
-    const userDocRef = doc(db, "users", userDocSnapshot.id);
-    await updateDoc(userDocRef, {
-      plan: plan,
-    });
-
-    console.log(`Sucesso: Plano do usuário ${buyerEmail} atualizado para ${plan}.`);
-    return NextResponse.json({ message: "Plano do usuário atualizado com sucesso." }, { status: 200 });
+    return NextResponse.json({ message: "Webhook processado com sucesso." }, { status: 200 });
 
   } catch (error) {
     console.error("Erro no webhook da Hotmart:", error);
