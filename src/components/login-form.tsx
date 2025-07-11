@@ -28,10 +28,10 @@ import { useState } from "react";
 import { Loader2 } from "lucide-react";
 
 const formSchema = z.object({
-  email: z.string().email({ message: "Dirección de correo electrónico no válida." }),
+  email: z.string().email({ message: "Invalid email address." }),
   password: z
     .string()
-    .min(6, { message: "La contraseña debe tener al menos 6 caracteres." }),
+    .min(6, { message: "Password must be at least 6 characters." }),
 });
 
 export function LoginForm() {
@@ -56,9 +56,9 @@ export function LoginForm() {
     } catch (error: any) {
       toast({
         variant: "destructive",
-        title: "Fallo de Inicio de Sesión",
+        title: "Login Failed",
         description:
-          error.message || "Ocurrió un error inesperado. Por favor, inténtalo de nuevo.",
+          error.message || "An unexpected error occurred. Please try again.",
       });
     } finally {
       setIsLoading(false);
@@ -68,9 +68,9 @@ export function LoginForm() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>¡Bienvenido de Nuevo!</CardTitle>
+        <CardTitle>Welcome Back!</CardTitle>
         <CardDescription>
-          Ingresa tus credenciales para acceder a tu cuenta.
+          Enter your credentials to access your account.
         </CardDescription>
       </CardHeader>
       <CardContent>
@@ -81,9 +81,9 @@ export function LoginForm() {
               name="email"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Correo Electrónico</FormLabel>
+                  <FormLabel>Email</FormLabel>
                   <FormControl>
-                    <Input placeholder="tu@ejemplo.com" {...field} />
+                    <Input placeholder="you@example.com" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -95,12 +95,12 @@ export function LoginForm() {
               render={({ field }) => (
                 <FormItem>
                   <div className="flex justify-between">
-                    <FormLabel>Contraseña</FormLabel>
+                    <FormLabel>Password</FormLabel>
                     <Link
                       href="/password-reset"
                       className="text-sm text-primary/80 hover:text-primary"
                     >
-                      ¿Olvidaste tu contraseña?
+                      Forgot password?
                     </Link>
                   </div>
                   <FormControl>
@@ -112,7 +112,7 @@ export function LoginForm() {
             />
             <Button type="submit" className="w-full" disabled={isLoading}>
               {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-              Iniciar Sesión
+              Sign In
             </Button>
           </form>
         </Form>

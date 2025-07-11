@@ -2,7 +2,7 @@ import { LoginForm } from "@/components/login-form";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Iniciar Sesión | Flux Academy",
+  title: "Login | Flux Academy",
 };
 
 export default function LoginPage() {
