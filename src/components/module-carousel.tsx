@@ -2,7 +2,6 @@
 
 import * as React from "react";
 import Image from "next/image";
-import { CheckCircle2 } from "lucide-react";
 import {
   Carousel,
   CarouselContent,
@@ -11,20 +10,19 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import { Card, CardContent, CardTitle } from "@/components/ui/card";
-import { Progress } from "@/components/ui/progress";
 import { Button } from "@/components/ui/button";
-import { Module, UserProgress } from "@/types";
+import { Module } from "@/types";
+import { PlayCircle } from "lucide-react";
 
 interface ModuleCarouselProps {
   modules: Module[];
-  progress: UserProgress;
-  onProgressUpdate: (moduleId: string, totalLessons: number) => void;
+  onStartModule: (moduleId: string) => void;
 }
 
-export function ModuleCarousel({ modules, progress, onProgressUpdate }: ModuleCarouselProps) {
+export function ModuleCarousel({ modules, onStartModule }: ModuleCarouselProps) {
   return (
     <div>
-      <h2 className="mb-4 text-2xl font-semibold tracking-tight">All Modules</h2>
+      <h2 className="mb-4 text-2xl font-semibold tracking-tight">Todos os Módulos</h2>
       <Carousel
         opts={{
           align: "start",
@@ -33,10 +31,6 @@ export function ModuleCarousel({ modules, progress, onProgressUpdate }: ModuleCa
       >
         <CarouselContent>
           {modules.map((module) => {
-            const completedLessons = progress[module.id]?.completedLessons || 0;
-            const progressPercentage = (completedLessons / module.lessons) * 100;
-            const isCompleted = progressPercentage >= 100;
-
             return (
               <CarouselItem key={module.id} className="md:basis-1/2 lg:basis-1/3">
                 <div className="p-1 h-full">
@@ -50,27 +44,19 @@ export function ModuleCarousel({ modules, progress, onProgressUpdate }: ModuleCa
                         data-ai-hint={module.imageHint}
                         className="object-cover w-full h-full"
                       />
-                      {isCompleted && (
-                        <div className="absolute top-2 right-2 bg-background/80 rounded-full p-1">
-                          <CheckCircle2 className="h-6 w-6 text-green-500" />
-                        </div>
-                      )}
                     </div>
                     <CardContent className="flex flex-col flex-grow p-6">
                       <CardTitle className="mb-2 text-lg">{module.title}</CardTitle>
                       <p className="text-sm text-muted-foreground line-clamp-3 mb-4 flex-grow">{module.description}</p>
                       
-                      <div className="mt-auto space-y-3">
-                        <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                          <Progress value={progressPercentage} className="h-2 w-full" />
-                          <span>{Math.floor(progressPercentage)}%</span>
-                        </div>
+                      <div className="mt-auto">
                         <Button
-                          onClick={() => onProgressUpdate(module.id, module.lessons)}
+                          onClick={() => onStartModule(module.id)}
                           size="sm"
                           className="w-full"
                         >
-                          {isCompleted ? "Revisit Module" : "Advance Progress"}
+                          <PlayCircle className="mr-2 h-4 w-4" />
+                          Iniciar Módulo
                         </Button>
                       </div>
                     </CardContent>

@@ -1,14 +1,16 @@
-"use client"
+"use client";
+
 import { modules } from "@/lib/mock-data";
 import { useAuth } from "@/hooks/use-auth";
 import { UserProgress } from "@/types";
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { ModuleCarousel } from "@/components/module-carousel";
+import { Progress } from "@/components/ui/progress";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 export default function DashboardPage() {
   const { user } = useAuth();
 
-  // Mock progress state. In a real app, this would come from Firestore.
   const [progress, setProgress] = useState<UserProgress>({
     "1": { completedLessons: 3 },
     "2": { completedLessons: 15 },
@@ -16,38 +18,54 @@ export default function DashboardPage() {
     "3": { completedLessons: 20 },
   });
 
-  const handleProgressUpdate = (moduleId: string, lessonCount: number) => {
-    // In a real app, you would call a server action here to update Firestore.
-    setProgress(prev => {
-      const currentProgress = prev[moduleId]?.completedLessons || 0;
-      const newCompletedLessons = (currentProgress + 1) % (lessonCount + 1);
-      console.log(`Updating progress for module ${moduleId}: ${newCompletedLessons} lessons`);
-      return {
-        ...prev,
-        [moduleId]: {
-          ...prev[moduleId],
-          completedLessons: newCompletedLessons,
-        }
-      }
-    });
+  const handleStartModule = (moduleId: string) => {
+    // Em um aplicativo real, você navegaria para a página do módulo aqui.
+    console.log(`Iniciando o módulo: ${moduleId}`);
   };
+
+  const totalLessons = useMemo(() => {
+    return modules.reduce((acc, module) => acc + module.lessons, 0);
+  }, []);
+
+  const totalCompletedLessons = useMemo(() => {
+    return Object.values(progress).reduce(
+      (acc, p) => acc + (p.completedLessons || 0),
+      0
+    );
+  }, [progress]);
+
+  const overallProgressPercentage =
+    totalLessons > 0 ? (totalCompletedLessons / totalLessons) * 100 : 0;
 
   return (
     <div className="space-y-8">
       <div>
         <h1 className="text-3xl font-bold tracking-tight">
-          Welcome back, {user?.displayName || user?.email?.split("@")[0]}!
+          Bem-vindo de volta, {user?.displayName || user?.email?.split("@")[0]}!
         </h1>
         <p className="text-muted-foreground">
-          Ready to continue your learning journey?
+          Pronto para continuar sua jornada de aprendizado?
         </p>
       </div>
 
-      <ModuleCarousel 
-        modules={modules}
-        progress={progress}
-        onProgressUpdate={handleProgressUpdate}
-      />
+      <Card>
+        <CardHeader>
+          <CardTitle>Seu Progresso Geral</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="flex items-center gap-4">
+            <Progress value={overallProgressPercentage} className="h-3 flex-1" />
+            <span className="font-semibold text-primary">
+              {Math.floor(overallProgressPercentage)}% Completo
+            </span>
+          </div>
+          <p className="text-sm text-muted-foreground mt-2">
+            Você completou {totalCompletedLessons} de {totalLessons} lições. Continue assim!
+          </p>
+        </CardContent>
+      </Card>
+
+      <ModuleCarousel modules={modules} onStartModule={handleStartModule} />
     </div>
   );
 }
