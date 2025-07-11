@@ -7,7 +7,7 @@ export const modules: Module[] = [
     description: "Learn the fundamentals of React, including components, props, and state.",
     imageUrl: "https://i.imgur.com/85NgJNK.png",
     imageHint: "abstract code",
-    lessons: 10,
+    lessons: 1,
     pdfUrl: "https://drive.google.com/file/d/1RYuOR2lHkr-PHa3AUtJ-lEdoYFFkE8ZM/view?usp=drive_link",
   },
   {
@@ -16,7 +16,7 @@ export const modules: Module[] = [
     description: "Dive deep into state management with Context API and Redux.",
     imageUrl: "https://i.imgur.com/xJHXKjI.png",
     imageHint: "network diagram",
-    lessons: 15,
+    lessons: 1,
     pdfUrl: "https://drive.google.com/file/d/112qJkCaY9TP9YTeNBtf7UWwKqUQgWdQF/view?usp=drive_link",
   },
   {
@@ -25,7 +25,7 @@ export const modules: Module[] = [
     description: "Build and deploy production-ready applications with Next.js.",
     imageUrl: "https://i.imgur.com/JvvCofs.png",
     imageHint: "server illustration",
-    lessons: 20,
+    lessons: 1,
     pdfUrl: "https://drive.google.com/file/d/1-j_t0cxp9DxzpdPjhm-_nCQi9Ms41-JI/view?usp=drive_link",
   },
   {
@@ -34,7 +34,7 @@ export const modules: Module[] = [
     description: "Enhance your JavaScript projects with static typing.",
     imageUrl: "https://i.imgur.com/zdWkm8s.png",
     imageHint: "typescript logo",
-    lessons: 12,
+    lessons: 1,
     pdfUrl: "https://drive.google.com/file/d/13g5B5CkNgPrifLsbRVmuFn_Y0I_-oFAD/view?usp=drive_link",
   },
   {
@@ -43,7 +43,7 @@ export const modules: Module[] = [
     description: "Understand the core principles of creating beautiful and usable interfaces.",
     imageUrl: "https://i.imgur.com/pMo3NKr.png",
     imageHint: "design wireframe",
-    lessons: 8,
+    lessons: 1,
     pdfUrl: "https://drive.google.com/file/d/1JmrWf1SkoYPQkrQ9FWLNTR6Lx8HG6TDZ/view?usp=drive_link",
   },
   {
@@ -52,7 +52,7 @@ export const modules: Module[] = [
     description: "Integrate backend services like auth and database with Firebase.",
     imageUrl: "https://i.imgur.com/OIBJvzm.png",
     imageHint: "firebase logo",
-    lessons: 18,
+    lessons: 1,
     pdfUrl: "https://drive.google.com/file/d/14E6RyFFMZgHcjy6xbVJGXoibQxh0RWIs/view?usp=drive_link",
   },
   {
@@ -61,7 +61,7 @@ export const modules: Module[] = [
     description: "Learn how to build and consume GraphQL APIs.",
     imageUrl: "https://i.imgur.com/zElS168.png",
     imageHint: "api database",
-    lessons: 14,
+    lessons: 1,
     pdfUrl: "https://drive.google.com/file/d/1AnXbEeWC9dEG5equDSt12lyqxJFrSiyc/view?usp=drive_link",
   },
   {
@@ -70,7 +70,7 @@ export const modules: Module[] = [
     description: "Master modern CSS features and preprocessors like Sass.",
     imageUrl: "https://i.imgur.com/4w9q4jI.png",
     imageHint: "css code",
-    lessons: 16,
+    lessons: 1,
     pdfUrl: "https://drive.google.com/file/d/1DQI91MVMuw0US_dY-jkyIRx-7vfV9z7F/view?usp=drive_link",
   },
   {
@@ -79,7 +79,7 @@ export const modules: Module[] = [
     description: "Build inclusive web applications that are usable by everyone.",
     imageUrl: "https://i.imgur.com/alCDUIE.png",
     imageHint: "accessibility screen reader",
-    lessons: 10,
+    lessons: 1,
     pdfUrl: "https://drive.google.com/file/d/15r77W9nTfCjAIbEyo5jf-8EDtTrb4HIA/view?usp=drive_link",
   },
 ];

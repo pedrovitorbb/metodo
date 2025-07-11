@@ -11,32 +11,39 @@ export default function DashboardPage() {
   const { user } = useAuth();
 
   const [progress, setProgress] = useState<UserProgress>({
-    "1": { completedLessons: 3 },
-    "2": { completedLessons: 15 },
-    "4": { completedLessons: 7 },
-    "3": { completedLessons: 20 },
+    "1": { completedLessons: 0 },
+    "2": { completedLessons: 1 },
+    "3": { completedLessons: 1 },
+    "4": { completedLessons: 0 },
   });
 
   const handleStartModule = (moduleId: string, pdfUrl?: string) => {
     if (pdfUrl) {
       window.open(pdfUrl, "_blank");
     }
-    console.log(`Iniciando o módulo: ${moduleId}`);
+    console.log(`Acessando material do módulo: ${moduleId}`);
   };
 
-  const totalLessons = useMemo(() => {
-    return modules.reduce((acc, module) => acc + module.lessons, 0);
-  }, []);
+  const handleToggleCompletion = (moduleId: string, isCompleted: boolean) => {
+    setProgress((prevProgress) => ({
+      ...prevProgress,
+      [moduleId]: {
+        completedLessons: isCompleted ? 1 : 0,
+      },
+    }));
+  };
 
-  const totalCompletedLessons = useMemo(() => {
+  const totalModules = useMemo(() => modules.length, []);
+
+  const totalCompletedModules = useMemo(() => {
     return Object.values(progress).reduce(
-      (acc, p) => acc + (p.completedLessons || 0),
+      (acc, p) => acc + (p.completedLessons > 0 ? 1 : 0),
       0
     );
   }, [progress]);
 
   const overallProgressPercentage =
-    totalLessons > 0 ? (totalCompletedLessons / totalLessons) * 100 : 0;
+    totalModules > 0 ? (totalCompletedModules / totalModules) * 100 : 0;
 
   return (
     <div className="space-y-8">
@@ -59,12 +66,17 @@ export default function DashboardPage() {
             </span>
           </div>
           <p className="text-sm text-muted-foreground mt-2">
-            Você completou {totalCompletedLessons} de {totalLessons} lições. Continue assim!
+            Você completou {totalCompletedModules} de {totalModules} módulos. Continue assim!
           </p>
         </div>
       </div>
 
-      <ModuleCarousel modules={modules} onStartModule={handleStartModule} />
+      <ModuleCarousel
+        modules={modules}
+        progress={progress}
+        onStartModule={handleStartModule}
+        onToggleCompletion={handleToggleCompletion}
+      />
     </div>
   );
 }

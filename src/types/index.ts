@@ -9,12 +9,12 @@ export interface Module {
   description: string;
   imageUrl: string;
   imageHint: string;
-  lessons: number;
+  lessons: number; // Represents total lessons, can be used for more granular progress later
   pdfUrl?: string;
 }
 
 export interface UserProgress {
   [moduleId: string]: {
-    completedLessons: number;
+    completedLessons: number; // Using 1 for completed, 0 for not completed
   };
 }
