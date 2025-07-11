@@ -47,12 +47,12 @@ export function ModuleCarousel({
               <CarouselItem key={module.id} className="md:basis-1/2 lg:basis-1/3">
                 <div className="p-1 h-full">
                   <Card className="flex flex-col h-full overflow-hidden transition-all duration-300 hover:shadow-lg hover:shadow-primary/20">
-                    <div className="aspect-[2/1] relative">
+                    <div className="aspect-[5/2] relative">
                       <Image
                         src={module.imageUrl}
                         alt={module.title}
                         width={600}
-                        height={300}
+                        height={240}
                         data-ai-hint={module.imageHint}
                         className="object-cover w-full h-full"
                       />
@@ -63,7 +63,7 @@ export function ModuleCarousel({
                     <CardFooter className="flex-col items-start gap-4 p-6 pt-0">
                        <Button
                         onClick={() => onStartModule(module.id, module.pdfUrl)}
-                        size="sm"
+                        size="lg"
                         variant="outline"
                         className="w-full"
                       >
