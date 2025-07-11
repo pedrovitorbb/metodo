@@ -9,7 +9,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Module, UserProgress } from "@/types";
 import { BookOpen, Lock } from "lucide-react";
@@ -62,7 +62,7 @@ export function ModuleCarousel({
                     : "hover:shadow-lg hover:shadow-primary/20"
                 }`}
               >
-                <div className="aspect-[16/9] w-full">
+                <div className="aspect-video w-full relative">
                   <Image
                     src={module.imageUrl}
                     alt={module.title}
@@ -77,28 +77,48 @@ export function ModuleCarousel({
                       <Lock className="h-12 w-12 text-white/80" />
                     </div>
                   )}
-                  {!isLocked && (
-                     <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/80 to-transparent">
-                       <Button
-                         onClick={() => onStartModule(module.id, module.pdfUrl)}
-                         size="lg"
-                         variant="outline"
-                         className="w-full"
-                         disabled={isLocked}
-                       >
-                         <BookOpen className="mr-2 h-4 w-4" />
-                         Acceder al PDF
-                       </Button>
-                     </div>
-                  )}
                 </div>
+                <CardContent className="p-6 flex-grow">
+                  <h3 className="text-xl font-bold mb-2">{module.title}</h3>
+                  <p className="text-muted-foreground text-sm line-clamp-3">
+                    {module.description}
+                  </p>
+                </CardContent>
+                <CardFooter className="p-6 pt-0 mt-auto flex flex-col items-start gap-4">
+                  <Button
+                    onClick={() => onStartModule(module.id, module.pdfUrl)}
+                    className="w-full"
+                    disabled={isLocked}
+                  >
+                    <BookOpen className="mr-2 h-4 w-4" />
+                    Acceder al PDF
+                  </Button>
+                  <div className="flex items-center space-x-2">
+                    <Checkbox
+                      id={`completed-${module.id}`}
+                      checked={isCompleted}
+                      onCheckedChange={(checked) =>
+                        onToggleCompletion(module.id, !!checked)
+                      }
+                      disabled={isLocked}
+                    />
+                    <Label
+                      htmlFor={`completed-${module.id}`}
+                      className={`${
+                        isLocked ? "text-muted-foreground" : "cursor-pointer"
+                      }`}
+                    >
+                      Marcar como finalizado
+                    </Label>
+                  </div>
+                </CardFooter>
               </Card>
             );
 
             return (
               <CarouselItem
                 key={module.id}
-                className="md:basis-1/2 lg:basis-1/3 xl:basis-1/4"
+                className="md:basis-1/2 lg:basis-1/3"
               >
                 <div className="p-1 h-full">
                   {isLocked ? (
