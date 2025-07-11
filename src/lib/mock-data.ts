@@ -49,6 +49,30 @@ export const modules: Module[] = [
     imageHint: "firebase logo",
     lessons: 18,
   },
+  {
+    id: "7",
+    title: "GraphQL Essentials",
+    description: "Learn how to build and consume GraphQL APIs.",
+    imageUrl: "https://placehold.co/600x400.png",
+    imageHint: "api database",
+    lessons: 14,
+  },
+  {
+    id: "8",
+    title: "Advanced CSS and Sass",
+    description: "Master modern CSS features and preprocessors like Sass.",
+    imageUrl: "https://placehold.co/600x400.png",
+    imageHint: "css code",
+    lessons: 16,
+  },
+  {
+    id: "9",
+    title: "Web Accessibility (WCAG)",
+    description: "Build inclusive web applications that are usable by everyone.",
+    imageUrl: "https://placehold.co/600x400.png",
+    imageHint: "accessibility screen reader",
+    lessons: 10,
+  },
 ];
 
 export const featuredModules = modules.slice(0, 3);

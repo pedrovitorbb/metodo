@@ -1,10 +1,10 @@
 "use client"
-import { ModuleCard } from "@/components/module-card";
 import { modules } from "@/lib/mock-data";
 import { useAuth } from "@/hooks/use-auth";
 import { UserProgress } from "@/types";
 import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { ModuleCarousel } from "@/components/module-carousel";
 
 export default function DashboardPage() {
   const { user } = useAuth();
@@ -39,24 +39,11 @@ export default function DashboardPage() {
         </p>
       </div>
 
-      <Card>
-        <CardHeader>
-          <CardTitle>All Modules</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {modules.map((module) => (
-              <ModuleCard
-                key={module.id}
-                module={module}
-                progress={progress[module.id]?.completedLessons || 0}
-                onProgressUpdate={(completed) => handleProgressUpdate(module.id, completed)}
-              />
-            ))}
-          </div>
-        </CardContent>
-      </Card>
-
+      <ModuleCarousel 
+        modules={modules}
+        progress={progress}
+        onProgressUpdate={handleProgressUpdate}
+      />
     </div>
   );
 }
