@@ -3,7 +3,7 @@
 import React, { useEffect } from "react";
 import { useAuth } from "@/hooks/use-auth";
 import { redirect, useRouter } from "next/navigation";
-import { Loader2, LogOut } from "lucide-react";
+import { Loader2, LogOut, User as UserIcon } from "lucide-react";
 import { Logo } from "@/components/logo";
 import { useToast } from "@/hooks/use-toast";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -69,9 +69,11 @@ export default function DashboardLayout({
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="ghost" size="icon" className="rounded-full">
-              <Avatar className="h-8 w-8">
-                <AvatarImage src={user.photoURL || `https://placehold.co/40x40.png`} data-ai-hint="user avatar" />
-                <AvatarFallback>{user.email?.charAt(0).toUpperCase()}</AvatarFallback>
+              <Avatar className="h-10 w-10">
+                <AvatarImage src={user.photoURL || ""} alt="User avatar" />
+                <AvatarFallback>
+                  <UserIcon className="h-6 w-6 text-muted-foreground" />
+                </AvatarFallback>
               </Avatar>
             </Button>
           </DropdownMenuTrigger>
