@@ -6,9 +6,9 @@ import { db } from "@/lib/firebase";
 // Mapeia o ID do produto da Hotmart para o plano no seu sistema
 const PRODUCT_ID_TO_PLAN: { [key: string]: 'basic' | 'premium' } = {
   // ID do produto do plano Básico
-  'tbpun0ml': 'basic', 
+  'm6i0896d': 'basic', 
   // ID do produto do plano Premium
-  'y3v9b5p3': 'premium', 
+  'jhynedgi': 'premium', 
 };
 
 export async function POST(request: NextRequest) {
@@ -16,6 +16,7 @@ export async function POST(request: NextRequest) {
     // 1. Verificação de Segurança (extremamente importante)
     // A linha abaixo lê o token secreto do seu arquivo .env.local (ou das variáveis de ambiente no servidor)
     // Isso garante que o token nunca fique exposto no código.
+    // O valor de HOTMART_HOTTOK deve ser configurado no seu ambiente.
     const hottok = request.headers.get("hottok");
     const expectedHottok = process.env.HOTMART_HOTTOK;
 
