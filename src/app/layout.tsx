@@ -4,7 +4,7 @@ import { AuthProvider } from "@/context/auth-context";
 import { Toaster } from "@/components/ui/toaster";
 
 export const metadata: Metadata = {
-  title: "Flux Academy",
+  title: "Metodo Hypno",
   description: "Expand your knowledge, one module at a time.",
 };
 

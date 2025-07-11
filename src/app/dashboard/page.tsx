@@ -3,7 +3,6 @@ import { modules } from "@/lib/mock-data";
 import { useAuth } from "@/hooks/use-auth";
 import { UserProgress } from "@/types";
 import { useState } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ModuleCarousel } from "@/components/module-carousel";
 
 export default function DashboardPage() {
@@ -14,18 +13,23 @@ export default function DashboardPage() {
     "1": { completedLessons: 3 },
     "2": { completedLessons: 15 },
     "4": { completedLessons: 7 },
+    "3": { completedLessons: 20 },
   });
 
-  const handleProgressUpdate = (moduleId: string, completedLessons: number) => {
+  const handleProgressUpdate = (moduleId: string, lessonCount: number) => {
     // In a real app, you would call a server action here to update Firestore.
-    console.log(`Updating progress for module ${moduleId}: ${completedLessons} lessons`);
-    setProgress(prev => ({
-      ...prev,
-      [moduleId]: {
-        ...prev[moduleId],
-        completedLessons,
+    setProgress(prev => {
+      const currentProgress = prev[moduleId]?.completedLessons || 0;
+      const newCompletedLessons = (currentProgress + 1) % (lessonCount + 1);
+      console.log(`Updating progress for module ${moduleId}: ${newCompletedLessons} lessons`);
+      return {
+        ...prev,
+        [moduleId]: {
+          ...prev[moduleId],
+          completedLessons: newCompletedLessons,
+        }
       }
-    }));
+    });
   };
 
   return (
