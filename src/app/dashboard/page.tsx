@@ -1,7 +1,6 @@
 "use client"
 import { ModuleCard } from "@/components/module-card";
-import { ModuleCarousel } from "@/components/module-carousel";
-import { featuredModules, modules } from "@/lib/mock-data";
+import { modules } from "@/lib/mock-data";
 import { useAuth } from "@/hooks/use-auth";
 import { UserProgress } from "@/types";
 import { useState } from "react";
@@ -40,12 +39,6 @@ export default function DashboardPage() {
         </p>
       </div>
 
-      <ModuleCarousel
-        modules={featuredModules}
-        progress={progress}
-        onProgressUpdate={handleProgressUpdate}
-      />
-      
       <Card>
         <CardHeader>
           <CardTitle>All Modules</CardTitle>
