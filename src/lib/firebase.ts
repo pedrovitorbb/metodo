@@ -3,14 +3,13 @@ import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig: FirebaseOptions = {
-  // IMPORTANT: Replace this with your Firebase project's configuration.
-  // You can find this in your project's settings in the Firebase console.
-  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY || "YOUR_API_KEY",
-  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN || "YOUR_AUTH_DOMAIN",
-  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID || "YOUR_PROJECT_ID",
-  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET || "YOUR_STORAGE_BUCKET",
-  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID || "YOUR_MESSAGING_SENDER_ID",
-  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID || "YOUR_APP_ID",
+  apiKey: "AIzaSyCO52NXqG1A7iZOOK96yr1IntIyS3BPffk",
+  authDomain: "login-67c98.firebaseapp.com",
+  projectId: "login-67c98",
+  storageBucket: "login-67c98.firebasestorage.app",
+  messagingSenderId: "792375254516",
+  appId: "1:792375254516:web:847b2a927667a3d1beeda1",
+  measurementId: "G-HFH4EZBQNV"
 };
 
 // Initialize Firebase
