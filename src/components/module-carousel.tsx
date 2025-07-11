@@ -62,15 +62,15 @@ export function ModuleCarousel({ modules, progress, onProgressUpdate }: ModuleCa
                       
                       <div className="mt-auto space-y-3">
                         <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                          <span>{Math.floor(progressPercentage)}%</span>
                           <Progress value={progressPercentage} className="h-2 w-full" />
+                          <span>{Math.floor(progressPercentage)}%</span>
                         </div>
                         <Button
                           onClick={() => onProgressUpdate(module.id, module.lessons)}
                           size="sm"
                           className="w-full"
                         >
-                          {isCompleted ? "Revisit Module" : "Continue Learning"}
+                          {isCompleted ? "Revisit Module" : "Advance Progress"}
                         </Button>
                       </div>
                     </CardContent>
