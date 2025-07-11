@@ -8,7 +8,7 @@ runConfig:
 
 # Define as variáveis de ambiente necessárias para o back-end.
 # O valor real e secreto delas será configurado no Console do Firebase
-# após o deploy.
+# ou via CLI após o deploy.
 env:
   - variable: HOTMART_HOTTOK
     secret: HOTMART_HOTTOK
