@@ -29,12 +29,14 @@ export async function POST(request: NextRequest) {
 
     const payload = await request.json();
 
-    // 2. Processar apenas compras aprovadas
-    if (payload.event !== "purchase.approved") {
+    // 2. Processar apenas eventos de compra relevantes
+    const validEvents = ["purchase.approved", "purchase.paid"];
+    if (!validEvents.includes(payload.event)) {
+        console.log(`Evento '${payload.event}' ignorado.`);
         return NextResponse.json({ message: "Evento ignorado." }, { status: 200 });
     }
 
-    const purchaseData = payload.data.purchase;
+    const purchaseData = payload.data.purchase || payload.data;
     const buyerEmail = purchaseData.buyer.email;
     const buyerName = purchaseData.buyer.name;
     const productId = purchaseData.product.id.toString();
@@ -51,7 +53,7 @@ export async function POST(request: NextRequest) {
     try {
       // Tenta encontrar um usuário existente pelo e-mail
       userRecord = await adminAuth.getUserByEmail(buyerEmail);
-      console.log(`Usuário encontrado: ${buyerEmail}, UID: ${userRecord.uid}. Atualizando plano.`);
+      console.log(`Usuário encontrado: ${buyerEmail}, UID: ${userRecord.uid}. Atualizando plano para ${plan}.`);
       
       // Atualiza o plano no Firestore
       const userDocRef = adminDb.collection("users").doc(userRecord.uid);
@@ -64,14 +66,11 @@ export async function POST(request: NextRequest) {
       if (error.code === 'auth/user-not-found') {
         console.log(`Usuário com e-mail ${buyerEmail} não encontrado. Criando novo usuário...`);
         
-        // Gera uma senha aleatória e segura
-        const randomPassword = Math.random().toString(36).slice(-10);
-
         userRecord = await adminAuth.createUser({
           email: buyerEmail,
-          emailVerified: true,
-          password: randomPassword,
+          emailVerified: true, // O e-mail da Hotmart é considerado verificado
           displayName: buyerName,
+          // Não definimos senha aqui. O usuário a criará.
         });
 
         // Cria o perfil no Firestore
@@ -84,12 +83,18 @@ export async function POST(request: NextRequest) {
           plan: plan, // Atribui o plano comprado
         });
         
-        // Envia o e-mail de redefinição de senha para o usuário criar sua própria senha
-        await adminAuth.generatePasswordResetLink(buyerEmail);
-        console.log(`Usuário ${buyerEmail} criado com sucesso. E-mail para definição de senha será enviado pelo Firebase.`);
+        try {
+            // Envia o e-mail de redefinição de senha para o usuário criar sua própria senha
+            const resetLink = await adminAuth.generatePasswordResetLink(buyerEmail);
+            console.log(`Usuário ${buyerEmail} criado com sucesso. E-mail para definição de senha será enviado pelo Firebase.`);
+            // Você pode opcionalmente usar o 'resetLink' para enviar um e-mail customizado, mas o Firebase já envia um padrão.
+        } catch (linkError) {
+            console.error(`Erro ao gerar link de redefinição de senha para ${buyerEmail}:`, linkError);
+        }
 
       } else {
         // Se for outro erro, registra e encerra
+        console.error("Erro ao procurar/criar usuário:", error);
         throw error;
       }
     }
