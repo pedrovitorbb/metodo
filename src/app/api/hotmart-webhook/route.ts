@@ -5,10 +5,10 @@ import { adminAuth, adminDb } from "@/lib/firebase-admin";
 // Mapeia o ID do produto da Hotmart para o plano no seu sistema
 const PRODUCT_ID_TO_PLAN: { [key: string]: 'basic' | 'premium' } = {
   // ID do produto do plano Básico
-  'm6i0896d': 'basic',
+  'tbpun0ml': 'basic',
   // ID do produto do plano Premium
-  'jhynedgi': 'premium',
-  // ID do produto para teste real
+  'y3v9b5p3': 'premium',
+  // ID do produto para teste real (se necessário)
   '7xigzj3x': 'premium'
 };
 
