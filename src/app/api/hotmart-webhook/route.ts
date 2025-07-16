@@ -9,7 +9,7 @@ const PRODUCT_ID_TO_PLAN: { [key: string]: 'basic' | 'premium' } = {
   // ID do produto do plano Premium
   'jhynedgi': 'premium',
   // ID do produto para teste real
-  '7xigzj3x': 'premium',
+  '7xigzj3x': 'premium'
 };
 
 export async function POST(request: NextRequest) {
@@ -102,7 +102,8 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json({ message: "Webhook processado com sucesso." }, { status: 200 });
 
-  } catch (error: any) {
+  } catch (error: any)
+   {
     console.error("ERRO GERAL no processamento do webhook da Hotmart:", error.message, error.stack);
     return NextResponse.json({ message: "Ocorreu um erro no servidor." }, { status: 500 });
   }
