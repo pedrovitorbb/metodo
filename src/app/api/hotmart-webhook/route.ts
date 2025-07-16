@@ -9,7 +9,7 @@ const PRODUCT_ID_TO_PLAN: { [key: string]: 'basic' | 'premium' } = {
   // ID do produto do plano Premium
   'y3v9b5p3': 'premium',
   // ID do produto para teste real (se necessário)
-  '7xigzj3x': 'premium'
+  '92kzxdok': 'premium'
 };
 
 export async function POST(request: NextRequest) {
